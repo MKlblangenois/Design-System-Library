@@ -1,12 +1,34 @@
 import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
 import Colors from './Colors'
 
+export const mainColors = [
+    {
+        colorHex: '#2ecc71',
+        colorName: 'Green',
+        colorStart: 40
+    },
+    {
+        colorHex: '#e67e22',
+        colorName: 'Orange',
+        colorStart: 60,
+    }
+]
+
 <Meta title="Colors" />
 
 # Colors
 ---
 ## Liste des couleurs principales
 ---
-<Colors colorHex="#2ecc71" colorName="Green" />
 
-<Colors colorHex="#e67e22" colorName="Orange" />
+export const AllColors = () => {
+    return mainColors.map(mainColor => (
+        <Colors
+            colorHex={mainColor.colorHex}
+            colorName={mainColor.colorName}
+            colorStart={mainColor.colorStart || 50}
+        />
+    ))
+}
+
+<AllColors />

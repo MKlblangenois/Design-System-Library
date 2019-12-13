@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { colorDeclinaison } from './Colors.tools'
+import { shadeColor } from './Colors.tools'
 
 const Title = styled.h3`
     font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -31,10 +31,16 @@ const CodeRender = styled.code`
     span { display: block }
 `
 
-const Colors = ({colorHex, colorName}) => {
+const Colors = ({colorHex, colorName, colorStart = 50}) => {
     let colors = [];
 
-    for(let i = 100; i > 0; i -= 10) { colors.push((colorDeclinaison(colorHex, i))) }
+    for(let i = colorStart; i <= 100; i += 10) {
+        colors[String(i-10).charAt(0)] = shadeColor(colorHex, (i - colorStart)*-1);
+    }
+
+    for(let j = colorStart; j > 0; j -= 10) {
+        colors[String(j-10).charAt(0)] = shadeColor(colorHex, colorStart - j);
+    }
     
     return (
         <section>
@@ -44,8 +50,10 @@ const Colors = ({colorHex, colorName}) => {
             </ColorTiles>
 
             <CodeRender>
+                <span>$c-{colorName.toLowerCase()}: {colorHex}</span>
+                <hr></hr>
                 {colors.map((color, index) => (
-                    <span>${colorName.toLowerCase()}-{index+1}0: {color};</span>
+                    <span>$c-{colorName.toLowerCase()}-{index}0: {color};</span>
                 ))}
             </CodeRender>
         </section>
