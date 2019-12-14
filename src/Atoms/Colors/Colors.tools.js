@@ -1,9 +1,8 @@
 export const shadeColor = (color, percent) => {
 
     // On vérifie si la couleur est au format rbg(a)
-    if(color.substring(0, 3) === 'rgb') {
+    if(color.substring(0, 3) === 'rgb')
         color = rgb2hex(color)
-    }
 
     let R = parseInt(color.substring(1,3),16),
         G = parseInt(color.substring(3,5),16),
