@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { shadeColor } from './Colors.tools'
+import { darkenHSLa, lightenHSLa } from './Colors.tools'
+
+var Color = require('color');
 
 const Title = styled.h3`
     font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -34,12 +36,12 @@ const CodeRender = styled.code`
 const Colors = ({colorHex, colorName, colorStart = 50}) => {
     let colors = [];
 
-    for(let i = colorStart; i <= 100; i += 10) {
-        colors[String(i-10).charAt(0)] = shadeColor(colorHex, (i - colorStart)*-1);
+    for(let i = colorStart/10; i <= 10; i++) {
+        colors[i - 1] = darkenHSLa(colorHex, (i*10) - colorStart);
     }
 
-    for(let j = colorStart; j > 0; j -= 10) {
-        colors[String(j-10).charAt(0)] = shadeColor(colorHex, colorStart - j);
+    for(let j = colorStart/10; j > 0; j--) {
+        colors[j - 1] = lightenHSLa(colorHex, ((j*10) - colorStart)*-1);
     }
     
     return (
