@@ -1,6 +1,6 @@
 
 
-const rgb2hex = rgb => {
+const RGBToHex = rgb => {
     rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
     return (rgb && rgb.length === 4) ? "#" +
      ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
@@ -109,7 +109,7 @@ export const lightenHSLa = (HSLa, amount) => {
     // TODO: - RGBa to HSLa
 
     if(HSLa.substring(0, 3) === 'rgb')
-        HSLa = hexToHSL(rgb2hex(HSLa))
+        HSLa = hexToHSL(RGBToHex(HSLa))
 
 
     if(HSLa.substring(0, 1) === '#')
@@ -129,7 +129,7 @@ export const darkenHSLa = (HSLa, amount) => {
     // TODO: - RGBa to HSLa
 
     if(HSLa.substring(0, 3) === 'rgb')
-        HSLa = hexToHSL(rgb2hex(HSLa))
+        HSLa = hexToHSL(RGBToHex(HSLa))
 
     if(HSLa.substring(0, 1) === '#')
         HSLa = hexToHSL(HSLa);
