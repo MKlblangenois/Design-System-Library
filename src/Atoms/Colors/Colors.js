@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { darkenHSLa, lightenHSLa } from './Colors.tools'
 
-var Color = require('color');
-
 const Title = styled.h3`
     font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;

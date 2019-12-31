@@ -2,11 +2,95 @@ import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
 import Colors from './Colors'
 import ColorSingle from './ColorSingle'
 
-<Meta title="Converted Colors" />
+import styled from 'styled-components'
+import { slugify } from '../../Helpers/helpers'
+import CodeRender from '../../Helpers/coderender.helpers'
+
+<Meta title="Colors/Converted Colors" />
+
+export const settingColors = {
+    foreground: '#222',
+    background: '#FFF'
+}
+
+export const ConvertedColors = [
+    {
+        title: "Typography",
+        colors: [
+            {
+                name: "red",
+                hex: "#FF0000",
+                use: "Heading"
+            },
+            {
+                name: "green",
+                hex: "#00FF00",
+                use: "Heading Alt"
+            },
+            {
+                name: "blue",
+                hex: "#0000FF",
+                use: "Text"
+            } 
+        ]
+    },
+    {
+        title: "Background",
+        colors: [
+            {
+                name: "gray-00",
+                hex: "#ecf0f1",
+                use: "Global"
+            },
+            {
+                name: "gray-30",
+                hex: "#bdc3c7",
+                use: "Block"
+            },
+            {
+                name: "gray-90",
+                hex: "#34495e",
+                use: "Card"
+            } 
+        ]
+    }
+]
 
 # Colors
 ---
-## Ici, on aura la liste des couleurs utilisés selon les couleurs générés
----
 
-<ColorSingle colorHex={`#FF0000`} colorName={`Red`} colorVariable={`$c-red`} />
+
+
+export const ConvertedColor = () => {
+    return ConvertedColors.map((colorGroup, i) => (
+        <div key={`colorGroupConverted-${i}`}>
+            <h2>{colorGroup.title}</h2>
+            {colorGroup.colors.map((color, j) => (
+                <ColorSingle
+                    colorHex={color.hex}
+                    colorName={color.name}
+                    colorUse={color.use}
+                    colorForeground={color.foreground || settingColors.foreground}
+                    colorBackground={color.background || settingColors.background}
+                    key={`colorGroupConverted-${i}-${j}`}
+                />
+            ))}
+        </div>
+    ))
+}
+
+<ConvertedColor />
+
+---
+# Variables
+<CodeRender>
+    {ConvertedColors.map((colorGroup, i) => 
+        <span key={`colorGroup-${i}`}>
+            // {colorGroup.title}
+            {colorGroup.colors.map((color, j) => (
+                <div key={`colorFrom-${i}-${j}`}>$c-{slugify(colorGroup.title)}-{slugify(color.use)} : {color.hex}</div>
+            ))}
+            {ConvertedColors.length - 1 !== i && <br />}
+        </span>
+    )}
+</CodeRender>
