@@ -47,6 +47,7 @@
     "babel-loader": "^8.0.6",
     "color": "^3.1.2",
     "jsx-to-string": "^1.4.0",
+    "prism-react-renderer": "^1.0.2",
     "react": "^16.12.0",
     "react-children-utilities": "^2.0.3",
     "styled-components": "^4.4.1"

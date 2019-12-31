@@ -1,0 +1,95 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import styled from 'styled-components'
+
+import CodeRender from '../../Helpers/coderender.helpers'
+
+export const Table = styled.table`
+    table-layout: fixed;
+    width: 100%;
+    font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-overflow-scrolling: touch;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0;
+    border-collapse: collapse;
+    tr {
+        text-align: left;
+        padding: .5rem;
+        border: 1px solid #F6F6F6;
+    }
+    tr td, tr th { padding: .5rem }
+    tr:nth-of-type(2n) {
+        background-color: #F8F8F8;
+    }
+`
+
+export const TableSpaceExample = styled.div`
+    width: ${props => props.size || `20px` } 
+    height: ${props => props.size || `20px` } 
+    background: #FF4785;
+`
+
+<Meta title="Spaces" />
+
+export const margins = {
+    xs: `4px`,
+    s: `8px`,
+    m: `16px`,
+    default: `32px`,
+    l: `64px`,
+    xl: `128px`
+}
+
+export const paddings = {
+    xs: `4px`,
+    s: `8px`,
+    m: `16px`,
+    default: `32px`,
+    l: `64px`,
+    xl: `128px`
+}
+
+# Spacing
+---
+
+export const SpacingTable = ({ type, objVars }) => (
+    <Table>
+        <thead>
+        <tr>
+            <th>Variable</th>
+            <th>px</th>
+            <th>Example</th>
+        </tr>
+        </thead>
+        <tbody>
+        {Object.keys(objVars).map(key => (
+            <tr>
+                <td><code>${type}{key !== 'default' && `-${key}`}</code></td>
+                <td>{objVars[key]}</td>
+                <td><TableSpaceExample size={objVars[key]} /></td>
+            </tr>
+        ))}
+        </tbody>
+    </Table>
+)
+
+## Margin
+<SpacingTable type="margin" objVars={margins} />
+
+---
+## Padding
+<SpacingTable type="padding" objVars={paddings} />
+
+---
+### Variables
+<CodeRender>
+    {Object.keys(margins).map(key => <div>$margin{key !== 'default' && `-${key}`} : {margins[key]}</div>)}
+    <br />
+    {Object.keys(paddings).map(key => <div>$padding-{key} : {paddings[key]}</div>)}
+</CodeRender>
