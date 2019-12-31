@@ -1,9 +1,12 @@
 import { configure, addDecorator, addParameters } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 
+import mediakodTheme from './theme';
+
 addParameters({
     options: {
-      showRoots: true,
+        theme: mediakodTheme,
+        showRoots: true,
     },
 });
 

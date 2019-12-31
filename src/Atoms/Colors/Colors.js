@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {slugify} from '../../Helpers/helpers'
 import { darkenHSLa, lightenHSLa } from './Colors.tools'
 
 const Title = styled.h3`
@@ -41,6 +42,9 @@ const Colors = ({colorHex, colorName, colorStart = 50}) => {
     for(let j = colorStart/10; j > 0; j--) {
         colors[j - 1] = lightenHSLa(colorHex, ((j*10) - colorStart)*-1);
     }
+
+    
+    //@ LOGAN : Vérifier si la couleur primaire est bien dans le listing 
     
     return (
         <section>
@@ -53,7 +57,7 @@ const Colors = ({colorHex, colorName, colorStart = 50}) => {
                 <span>$c-{colorName.toLowerCase()}: {colorHex}</span>
                 <hr></hr>
                 {colors.map((color, index) => (
-                    <span>$c-{colorName.toLowerCase()}-{index}0: {color};</span>
+                    <span>$c-{slugify(colorName)}-{index}0: {color}; {index*10 === colorStart && `// default`}</span>
                 ))}
             </CodeRender>
         </section>
